@@ -1,3 +1,33 @@
-body { background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
-.card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
-button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+/* Giữ nguyên code cũ và thêm phần này */
+#result-container {
+    margin-top: 20px;
+    text-align: left;
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 13px;
+    border: 1px solid #ddd;
+}
+
+#json-output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #333;
+    margin: 0;
+}
+
+#btnFetch {
+    background: #2196F3;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#btnFetch:hover {
+    background: #1976D2;
+}; }
