@@ -1,33 +1,44 @@
-/* Giữ nguyên code cũ và thêm phần này */
-#result-container {
+/* Layout cho danh sách thẻ */
+#card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
     margin-top: 20px;
-    text-align: left;
-    background: #f4f4f4;
+}
+
+/* Thiết kế từng thẻ (card item) */
+.card-item {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 12px;
     padding: 15px;
-    border-radius: 8px;
-    max-height: 300px;
-    overflow-y: auto;
-    font-size: 13px;
-    border: 1px solid #ddd;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-#json-output {
-    white-space: pre-wrap;
-    word-wrap: break-word;
+.card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.card-item h3 {
+    margin: 0 0 10px 0;
     color: #333;
-    margin: 0;
+    font-size: 18px;
 }
 
-#btnFetch {
-    background: #2196F3;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+.card-item p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
 }
 
-#btnFetch:hover {
-    background: #1976D2;
-}; }
+.status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    background: #e3f2fd;
+    color: #1976d2;
+}
