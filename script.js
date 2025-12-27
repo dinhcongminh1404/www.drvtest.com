@@ -3,33 +3,36 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwd79CuVIMIFw95kY5LjP0q
 document.getElementById('btnFetch').addEventListener('click', function() {
     const btn = this;
     const loading = document.getElementById('loading');
-    const output = document.getElementById('json-output');
+    const container = document.getElementById('card-container');
 
-    // 1. Hiển thị trạng thái đang tải
     btn.disabled = true;
     loading.style.display = "block";
-    output.innerText = "";
+    container.innerHTML = ""; // Xóa các card cũ (nếu có)
 
-    // 2. Gọi API bằng fetch
     fetch(API_URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Mạng có vấn đề, không thể lấy dữ liệu");
-            }
-            return response.json(); // Chuyển đổi phản hồi sang dạng JSON
-        })
+        .then(response => response.json())
         .then(data => {
-            // 3. Hiển thị dữ liệu lên màn hình
-            output.innerText = JSON.stringify(data, null, 2); 
-            console.log("Dữ liệu nhận được:", data);
+            // Kiểm tra nếu data là mảng, nếu không hãy ép về mảng để lặp
+            const items = Array.isArray(data) ? data : [data];
+
+            items.forEach(item => {
+                // Tạo mã HTML cho từng card
+                // Lưu ý: Thay đổi item.Name, item.Value... cho đúng với tên cột trong Google Sheet của bạn
+                const cardHTML = `
+                    <div class="card-item">
+                        <span class="status-badge">ID: ${item.id || 'N/A'}</span>
+                        <h3>${item.title || item.Name || 'Không có tiêu đề'}</h3>
+                        <p><strong>Thông tin:</strong> ${item.description || item.Content || '...'}</p>
+                        <p style="color: #888; font-size: 12px;">Cập nhật: ${new Date().toLocaleDateString()}</p>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
         })
         .catch(error => {
-            // Xử lý lỗi nếu có
-            output.innerText = "Lỗi: " + error.message;
-            output.style.color = "red";
+            container.innerHTML = `<p style="color:red">Lỗi: ${error.message}</p>`;
         })
         .finally(() => {
-            // 4. Kết thúc: Ẩn trạng thái tải, mở lại nút
             loading.style.display = "none";
             btn.disabled = false;
         });
