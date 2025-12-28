@@ -29,9 +29,9 @@ h1{
 }
 #empcode, .form-group input{
     color:#364158e0;
-    font-family: 'Open Sans';
+    font-family: 'Roboto';
     font-size:15px;
-    font-weight: 600;
+    font-weight: 400;
     text-align: center;
     width:350px;
     padding:15px;
@@ -48,9 +48,9 @@ button{
     height:50px;
     margin-top: 10px;
     color:#364158e0;
-    font-family: 'Open Sans';
+    font-family: 'Roboto';
     font-size:15px;
-    font-weight:600;
+    font-weight:500;
     border: none;
     border-radius: 6px;
 }
