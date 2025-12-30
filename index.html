@@ -1,43 +1,127 @@
+
+<!doctype html>
+<html lang="vi">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lora&family=Open+Sans:wght@300;400&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bungee&family=Lora&family=Open+Sans:wght@300;400&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký phép năm</title>
+  <meta name="description" content="Biểu mẫu đăng ký, tra cứu phép năm cho nhân viên. Nhập mã thẻ để lấy dữ liệu và gửi đăng ký.">
+
+  <!-- Gộp Google Fonts thành 1 link để giảm request -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&family=Bungee&family=Lora&family=Open+Sans:wght@300;400&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  >
 </head>
-<body>   
-    <div class="card">
-        <input type="text" id="empcode" name="empcode" placeholder="Số thẻ nhân viên">
-        <div>
-            <button id="btn-remain" onclick="remainAL()">Lấy dữ liệu</button>
-        </div> 
-        <h1>ĐĂNG KÝ</h1>
-        <p id="title-2">PHÉP NĂM</p>
-        
-        <h2 id="remain"></h2>
-        <div id="loading" style="display: none;">Đang tải dữ liệu...</div>
-        
-        <div id="card-container"></div>
+<body>
+  <header class="page-header" role="banner">
+    <!-- Có thể thêm logo/brand nếu cần -->
+  </header>
+
+  <main id="main" class="site-main">
+    <section class="card" aria-labelledby="form-title">
+      <h1 id="form-title">ĐĂNG KÝ</h1>
+      <p id="title-2" class="subtitle">PHÉP NĂM</p>
+
+      <!-- Nhóm tra cứu phép còn lại -->
+
+<div class="form-group">
+  <label for="empcode">Số thẻ nhân viên</label>
+
+  <!-- Bọc input & button để điều khiển layout theo hàng -->
+  <div class="input-actions">
+    <input
+      type="text"
+      id="empcode"
+      name="empcode"
+      placeholder="VD: 123456"
+      inputmode="numeric"
+      pattern="^[0-9]{4,10}$"
+    >
+    <button
+      id="btn-remain"
+      type="button"
+      class="btn btn--secondary"
+      onclick="remainAL()"
+      aria-controls="remain"
+    >
+      Lấy dữ liệu
+    </button>
+  </div>
+
+  <h2 id="remain" class="remain-heading" aria-live="polite"></h2>
+</div>
+
+      <!-- Biểu mẫu gửi đăng ký -->
+      <form id="dataForm" novalidate>
+        <input type="hidden" id="action" name="action" value="create">
+
+        <div class="form-group">
+          <label for="Ten">Họ và tên</label>
+          <input
+            type="text"
+            id="Ten"
+            name="Ten"
+            placeholder="Nhập tên"
+            autocomplete="name"
+            required
+          >
         </div>
-        <h2></h2>
-        <form id="dataForm">
-                <input type="text" id="action" name="action" value="create" hidden="hidden">
-                <div class="form-group">
-                    <input type="text" id="Ten" name="Ten" placeholder="Nhập tên" required>
-                </div>
-    
-                <div class="form-group">
-                    <input type="text" id="Email" name="Email" placeholder="Nhập địa chỉ Email" required>
-                </div>
-                    <div class="form-group">
-                    <input type="text" id="ChucVu" name="ChucVu" placeholder="Chức danh" required>
-                </div>
-                <div class="form-button">
-                    <button type="submit" id="btnSubmit">Gửi dữ liệu</button>
-                    <button type="submit" id="btnSubmit">Hủy đăng ký</button>
-                </div>
-                
-            </form>
-        <div id="status-msg"></div>
-        <script src="script.js"> </script>
-    </body>  
+
+        <div class="form-group">
+          <label for="Email">Email</label>
+          <input
+            type="email"
+            id="Email"
+            name="Email"
+            placeholder="ten@congty.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="form-group form-group--row">
+          <div class="form-field">
+            <label for="ChucVu">Chức danh</label>
+            <input
+              type="text"
+              id="ChucVu"
+              name="ChucVu"
+              placeholder="VD: Chuyên viên C&B"
+              autocomplete="organization-title"
+              required
+            >
+          </div>
+          <div class="form-field">
+            <label for="PhongBan">Phòng/Ban</label>
+            <input
+              type="text"
+              id="PhongBan"
+              name="PhongBan"
+              placeholder="VD: HR"
+              autocomplete="organization"
+            >
+          </div>
+        </div>
+
+        <div class="form-button">
+          <button type="submit" id="btnSubmit" class="btn btn--primary">Gửi dữ liệu</button>
+          <button type="button" id="btnCancel" class="btn btn--ghost">Hủy đăng ký</button>
+        </div>
+      </form>
+    </section>
+
+    <div id="loading" hidden role="status" aria-live="polite">Đang tải dữ liệu...</div>
+    <div id="card-container" class="card-container" aria-live="polite"></div>
+    <div id="status-msg" class="status-msg" role="status" aria-live="polite"></div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <!-- Chân trang nếu cần -->
+  </footer>
+
+  <!-- Nên defer để không chặn render -->
+  <script src="script.js" defer></script>
+</body>
+</html>
+``

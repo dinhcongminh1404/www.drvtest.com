@@ -1,64 +1,201 @@
-body{
-font-family: 'Roboto';
-justify-items: center;
-background:linear-gradient(90deg, #E6A5B0, #99B3E8);
+
+/* ========== Biến & reset ========== */
+:root {
+  --bg: #ffffff;
+  --fg: #5c667a;
+  --muted: #5c667a;
+  --brand: #2b6df8;
+  --brand-600: #2256c8;
+
+  --page-gradient: linear-gradient(90deg, #E6A5B0, #99B3E8);
+
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --radius: 10px;
+
+  --font-sans: "Roboto";
+  --font-brand: "Bungee", var(--font-sans);
+
+  /* Chiều rộng container tối đa (desktop) */
+  --container-max: 800px;
 }
 
-h1{ 
-    color:#fff;
-    font-family: 'Bungee';
-    font-size:80px;
-    font-weight: 800;
-    margin-top: 40px;
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--fg);
+  min-height: 100vh;
+  background: var(--page-gradient);
+  background-attachment: fixed;
+  /* safe area cho iPhone có tai thỏ */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
-#title-2{
-    color:#364158e0;
-    font-family: 'Bungee';
-    font-size:35px;
-    font-weight: 400;
-    margin-top: -65px;
-    text-align: center;
+/* Container chính để căn giữa nội dung */
+.site-main {
+  width: min(var(--container-max), 100% - 2rem);
+  margin-inline: auto;
+  padding-block: var(--space-3);
 }
+
+/* ========== Tiêu đề ========== */
+h1 {
+  color: #E6A5B0;
+  font-family: var(--font-brand);
+  font-size: clamp(26px, 6vw, 40px); /* co giãn theo màn hình */
+  font-weight: 800;
+  margin-top: 32px;
+  margin-bottom: .25rem;
+  text-align: center;
+}
+
+#title-2 {
+  color: #364158e0;
+  font-family: var(--font-brand);
+  font-size: clamp(13px, 3.5vw, 15px);
+  font-weight: 400;
+  margin-top: -8px;
+  text-align: center;
+}
+
+/* ========== Card ========== */
+.card {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  background-color: #fff;
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+/* ========== Form ========== */
 .form-group {
-    margin-top: 20px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;      /* mobile-first: stack theo cột */
+  gap: .75rem;                 /* khoảng cách đều giữa các phần tử */
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-1);
 }
-#empcode{
-    margin-top: 160px;;
+
+/* Nhóm 2 cột (desktop) sẽ là grid; mobile sẽ stack */
+.form-group--row {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: 1fr 1fr;
 }
-#empcode, .form-group input{
-    color:#364158e0;
-    font-family: 'Roboto';
-    font-size:15px;
-    font-weight: 400;
-    text-align: center;
-    width:350px;
-    padding:15px;
-    outline: none;
-    border: none;
-    border-radius: 6px;
+
+/* Field từng ô: label + input */
+.form-field {
+  display: grid;
+  gap: .5rem;
 }
-#dataForm{
-    margin-top:-10px;
+
+label {
+  font-weight: 600;
+  font-size: clamp(13px, 3.5vw, 14px);
 }
-button{
-    margin-left: 95px;
-    width:160px;
-    height:50px;
-    margin-top: 10px;
-    color:#364158e0;
-    font-family: 'Roboto';
-    font-size:15px;
-    font-weight:500;
-    border: none;
-    border-radius: 6px;
+
+input[type="text"],
+input[type="email"] {
+  color: #364158e0;
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 3.8vw, 15px);
+  font-weight: 400;
+  text-align: left;
+  width: 100%;
+  padding: .875rem 1rem;       /* touch target lớn hơn trên mobile */
+  border: 1px solid #d9dbe1;
+  border-radius: 10px;         /* bo tròn mềm hơn */
+  background-color: #f6f6f6;
+  outline: none;
 }
-.form-button button{
-    margin-left: 0;
+
+button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
-.form-button{
-    display: flex;
-    width: 350px;
-    justify-content: space-around;
+
+/* Mã nhân viên: cho phép hẹp lại trên desktop */
+#empcode { max-width: 100%; }
+
+/* ========== Buttons ========== */
+button {
+  width: 100%;                 /* full-width trên mobile */
+  min-height: 48px;            /* >= 44px theo khuyến nghị */
+  padding: .75rem 1rem;
+  margin-top: 10px;
+  color: #364158e0;
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 3.8vw, 15px);
+  font-weight: 600;
+  border: 1px solid #d9dbe1;
+  border-radius: 10px;
+  background: #f3f4f6;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, transform .06s ease;
+}
+
+button:hover { background: #e9ecf3; }
+button:active { transform: translateY(1px); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--primary {
+  background: #E6A5B0;
+  border-color: transparent;
+  color: #fff;
+}
+.btn--primary:hover { background: var(--brand-600); }
+
+.btn--secondary { background: #f3f4f6; }
+.btn--ghost {border-color: #d9dbe1; }
+
+/* Nút lấy dữ liệu đặt cùng input, vẫn full-width trên mobile */
+#btn-remain { align-self: stretch; }
+
+/* ========== Trạng thái ========== */
+.remain-heading {
+  margin-top: var(--space-1);
+  font-size: clamp(15px, 4vw, 18px);
+}
+#loading[hidden] { display: none; }
+.status-msg {
+  margin-top: var(--space-1);
+  color: var(--muted);
+  font-size: clamp(13px, 3.5vw, 14px);
+}
+
+/* ========== Responsive breakpoints ========== */
+
+/* Tablet trở lên (≥768px): nút không cần full-width, form 2 cột gọn gàng */
+@media (min-width: 768px) {
+  button { width: auto; min-width: 160px; }
+  #empcode{width:100%};
+  .form-group--row { grid-template-columns: 1fr 1fr; }
+  #btn-remain { align-self: start; width: auto; }
+}
+
+/* Desktop rộng (≥1024px): nới container và spacing */
+@media (min-width: 1024px) {
+  :root { --container-max: 900px; }
+  .card { padding: var(--space-4); }
+}
+
+/* Giảm chuyển động nếu người dùng yêu cầu */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
 }
